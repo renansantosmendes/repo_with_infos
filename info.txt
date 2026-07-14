@@ -1,0 +1,76 @@
+ 
+---
+ 
+## 1. Ficha Institucional — CogniSphere Technologies
+ 
+**Nome da empresa:** CogniSphere Technologies
+**Fundação:** 2023
+**Sede:** São Paulo, Brasil (operação remota-first)
+**Setor:** Inteligência Artificial aplicada à Educação (EdTech B2B)
+ 
+**Quem é a empresa:**
+A CogniSphere Technologies é uma startup de tecnologia educacional que desenvolve soluções de
+IA para personalização do ensino em instituições de nível superior e cursos corporativos. Nasceu
+como um projeto acadêmico e hoje atende clientes-piloto em universidades privadas e centros de
+treinamento corporativo.
+ 
+**Posicionamento de mercado:**
+Posiciona-se como uma alternativa "ágil e acessível" a soluções corporativas mais robustas de
+tutoria por IA, focando em implementação rápida e baixo custo inicial para instituições de
+pequeno e médio porte.
+ 
+**Proposta de valor:**
+"Tecnologia de ponta com implementação simples, para instituições que querem começar a usar IA
+educacional sem grandes investimentos iniciais."
+ 
+**Diferenciais divulgados pela empresa:**
+- Onboarding rápido (claim de "implementação em 48 horas")
+- Preço de entrada mais baixo que concorrentes estabelecidos
+- Interface simplificada, focada em poucos casos de uso (geração de exercícios e resumos)
+**Limitações conhecidas (não divulgadas publicamente pela empresa, mas identificáveis em análise
+de mercado):**
+- Pouca transparência sobre como o modelo adapta o nível de dificuldade (falta de explicabilidade)
+- Não possui camada de curadoria pedagógica com especialistas em educação
+- Suporte ao professor limitado — o produto é mais voltado à automação do que ao apoio docente
+- Poucos estudos de caso publicados sobre resultados de aprendizagem
+---
+ 
+## 2. Ficha de Produto — NeuraLearn AI
+ 
+**Nome do produto:** NeuraLearn AI
+**Categoria:** Tutor inteligente baseado em IA Generativa
+**Lançamento:** Anunciado publicamente há poucos dias (posts em redes sociais, sem material
+institucional aprofundado ainda disponível)
+ 
+**O que o produto promete:**
+- Geração automática de exercícios e resumos a partir de conteúdo enviado pelo professor
+- Chat de dúvidas para alunos, disponível 24/7
+- Painel simples de acompanhamento de uso pelos gestores da instituição
+**O que o produto NÃO detalha claramente (gap identificado):**
+- Método de adaptação de dificuldade por aluno (é citado como "adaptativo", mas sem explicação
+  técnica ou pedagógica)
+- Nível de precisão/checagem de conteúdo gerado (sem menção a curadoria ou revisão humana)
+- Nenhuma menção a integração com plataformas de ensino existentes (LMS)
+- Não posiciona o produto como apoio ao professor — a comunicação sugere substituição da função
+  docente em parte do processo, o que pode gerar resistência em instituições de ensino
+---
+ 
+## 3. Post de Lançamento (LinkedIn) — Fictício, para simular "buzz" nas redes
+ 
+> 🚀 **Chega o NeuraLearn AI!**
+>
+> Depois de meses de desenvolvimento, temos o prazer de anunciar o NeuraLearn AI: um tutor de IA
+> que gera exercícios, resumos e responde dúvidas de alunos em segundos.
+>
+> Sabemos que instituições de ensino querem inovar, mas nem sempre têm tempo ou orçamento para
+> implementações longas. Por isso criamos uma solução simples, rápida de implementar e acessível.
+>
+> 📌 Onboarding em até 48h
+> 📌 Preço competitivo para instituições de todos os portes
+> 📌 Chat de dúvidas disponível a qualquer hora
+>
+> O futuro da educação já começou. E ele é mais simples do que você imagina.
+>
+> #EdTech #InteligenciaArtificial #Inovacao #Educacao
+ 
+---
