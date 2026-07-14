@@ -1,0 +1,871 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NeuraLearn AI — Tutor inteligente para instituições de ensino | CogniSphere Technologies</title>
+<meta name="description" content="NeuraLearn AI: o tutor de IA que sua instituição implementa em 48 horas. Geração automática de exercícios, chat de dúvidas 24/7 e painel de gestão — sem complexidade, sem grandes investimentos.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:            #F6F7FA;
+    --bg-panel:      #FFFFFF;
+    --ink:           #12141C;
+    --ink-soft:      #4A4F60;
+    --muted:         #848B9E;
+    --line:          #E2E5EC;
+    --indigo:        #2B2F77;
+    --indigo-deep:   #1B1E52;
+    --spark:         #FF9F1C;
+    --spark-soft:    #FFE4BE;
+    --teal:          #0EA5A3;
+    --radius:        14px;
+    --max:           1180px;
+  }
+
+  *{ box-sizing:border-box; margin:0; padding:0; }
+
+  html{ scroll-behavior:smooth; }
+
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'Inter', sans-serif;
+    font-size:16px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  h1,h2,h3,.display{
+    font-family:'Space Grotesk', sans-serif;
+    letter-spacing:-0.02em;
+    color:var(--ink);
+  }
+
+  .mono{
+    font-family:'IBM Plex Mono', monospace;
+    letter-spacing:0.04em;
+  }
+
+  a{ color:inherit; text-decoration:none; }
+
+  img,svg{ display:block; max-width:100%; }
+
+  .wrap{
+    max-width:var(--max);
+    margin:0 auto;
+    padding:0 32px;
+  }
+
+  :focus-visible{
+    outline:2.5px solid var(--spark);
+    outline-offset:3px;
+    border-radius:4px;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important; scroll-behavior:auto !important; }
+  }
+
+  /* ---------- NAV ---------- */
+  header{
+    position:sticky; top:0; z-index:50;
+    background:rgba(246,247,250,0.86);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  nav{
+    max-width:var(--max);
+    margin:0 auto;
+    padding:18px 32px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+  }
+  .logo{
+    display:flex; align-items:center; gap:10px;
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:700;
+    font-size:1.15rem;
+  }
+  .logo-mark{
+    width:26px; height:26px; flex-shrink:0;
+  }
+  .logo small{
+    display:block;
+    font-family:'IBM Plex Mono', monospace;
+    font-weight:400;
+    font-size:0.58rem;
+    letter-spacing:0.14em;
+    color:var(--muted);
+    text-transform:uppercase;
+    margin-top:2px;
+  }
+  .nav-links{
+    display:flex; gap:34px;
+    font-size:0.92rem;
+    font-weight:500;
+    color:var(--ink-soft);
+  }
+  .nav-links a{ transition:color .15s ease; }
+  .nav-links a:hover{ color:var(--ink); }
+  .nav-cta{
+    display:inline-flex; align-items:center; gap:8px;
+    background:var(--indigo);
+    color:#fff;
+    padding:11px 20px;
+    border-radius:999px;
+    font-size:0.88rem;
+    font-weight:600;
+    transition:background .15s ease, transform .15s ease;
+    white-space:nowrap;
+  }
+  .nav-cta:hover{ background:var(--indigo-deep); transform:translateY(-1px); }
+  .nav-toggle{ display:none; }
+
+  @media (max-width:860px){
+    .nav-links{ display:none; }
+    .nav-cta{ padding:9px 16px; font-size:0.82rem; }
+  }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;
+    padding:96px 0 72px;
+    overflow:hidden;
+  }
+  .hero-grid{
+    display:grid;
+    grid-template-columns:1.05fr 0.95fr;
+    gap:56px;
+    align-items:center;
+  }
+  .eyebrow{
+    display:inline-flex; align-items:center; gap:10px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.72rem;
+    letter-spacing:0.16em;
+    text-transform:uppercase;
+    color:var(--indigo);
+    margin-bottom:22px;
+  }
+  .eyebrow::before{
+    content:"";
+    width:20px; height:1px;
+    background:var(--spark);
+  }
+  .hero h1{
+    font-size:clamp(2.4rem, 4.6vw, 3.7rem);
+    font-weight:700;
+    line-height:1.05;
+    margin-bottom:22px;
+  }
+  .hero h1 em{
+    font-style:normal;
+    background:linear-gradient(180deg, transparent 62%, var(--spark-soft) 62%);
+  }
+  .hero p.lead{
+    font-size:1.12rem;
+    color:var(--ink-soft);
+    max-width:520px;
+    margin-bottom:34px;
+  }
+  .hero-ctas{ display:flex; gap:14px; flex-wrap:wrap; margin-bottom:30px; }
+  .btn{
+    display:inline-flex; align-items:center; gap:9px;
+    padding:14px 26px;
+    border-radius:999px;
+    font-weight:600;
+    font-size:0.95rem;
+    transition:transform .15s ease, box-shadow .15s ease, background .15s ease;
+  }
+  .btn-primary{
+    background:var(--spark);
+    color:#1B1200;
+  }
+  .btn-primary:hover{ transform:translateY(-2px); box-shadow:0 10px 24px -8px rgba(255,159,28,0.55); }
+  .btn-ghost{
+    background:transparent;
+    color:var(--ink);
+    border:1.5px solid var(--line);
+  }
+  .btn-ghost:hover{ border-color:var(--indigo); }
+
+  .hero-meta{
+    display:flex; gap:28px;
+    font-size:0.82rem;
+    color:var(--muted);
+  }
+  .hero-meta span{ display:flex; align-items:center; gap:7px; }
+  .dot{ width:6px; height:6px; border-radius:50%; background:var(--teal); flex-shrink:0; }
+
+  /* Signature spark visual */
+  .spark-stage{
+    position:relative;
+    aspect-ratio:1/1;
+    max-width:460px;
+    margin-left:auto;
+  }
+  .spark-panel{
+    position:absolute; inset:0;
+    background:var(--indigo);
+    border-radius:28px;
+    overflow:hidden;
+  }
+  .spark-panel svg{ width:100%; height:100%; }
+  .spark-caption{
+    position:absolute;
+    left:24px; bottom:22px;
+    right:24px;
+    display:flex; justify-content:space-between; align-items:flex-end;
+    color:#fff;
+  }
+  .spark-caption .num{
+    font-family:'Space Grotesk', sans-serif;
+    font-size:2.1rem;
+    font-weight:700;
+    line-height:1;
+  }
+  .spark-caption .label{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.66rem;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    color:#C8CBEE;
+    text-align:right;
+    max-width:150px;
+  }
+
+  @keyframes travel{
+    0%{ stroke-dashoffset:340; }
+    70%{ stroke-dashoffset:0; }
+    100%{ stroke-dashoffset:0; }
+  }
+  @keyframes glow{
+    0%,100%{ opacity:0.35; }
+    50%{ opacity:1; }
+  }
+  .spark-path{
+    stroke-dasharray:340;
+    stroke-dashoffset:340;
+    animation:travel 2.4s cubic-bezier(.2,.8,.2,1) forwards;
+  }
+  .spark-node{ animation:glow 2.6s ease-in-out infinite; }
+  .spark-node:nth-child(2){ animation-delay:.3s; }
+  .spark-node:nth-child(3){ animation-delay:.6s; }
+  .spark-node:nth-child(4){ animation-delay:.9s; }
+
+  @media (max-width:940px){
+    .hero-grid{ grid-template-columns:1fr; }
+    .spark-stage{ margin:0 auto; max-width:340px; }
+  }
+
+  /* ---------- TRUST BAR ---------- */
+  .trust{
+    border-top:1px solid var(--line);
+    border-bottom:1px solid var(--line);
+    padding:26px 0;
+  }
+  .trust .wrap{
+    display:flex; align-items:center; gap:28px; flex-wrap:wrap;
+    justify-content:space-between;
+  }
+  .trust p{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.72rem;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    color:var(--muted);
+  }
+  .trust-tags{ display:flex; gap:10px; flex-wrap:wrap; }
+  .trust-tag{
+    font-size:0.82rem;
+    font-weight:600;
+    color:var(--ink-soft);
+    background:var(--bg-panel);
+    border:1px solid var(--line);
+    padding:8px 16px;
+    border-radius:999px;
+  }
+
+  /* ---------- SECTION SHELL ---------- */
+  section{ padding:96px 0; }
+  .section-head{
+    max-width:640px;
+    margin-bottom:56px;
+  }
+  .section-head .eyebrow{ margin-bottom:16px; }
+  .section-head h2{
+    font-size:clamp(1.8rem, 3vw, 2.5rem);
+    font-weight:700;
+    margin-bottom:16px;
+  }
+  .section-head p{
+    color:var(--ink-soft);
+    font-size:1.02rem;
+  }
+
+  /* ---------- PROBLEM ---------- */
+  .problem-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:24px;
+  }
+  .problem-card{
+    background:var(--bg-panel);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:30px 26px;
+  }
+  .problem-card .mono{
+    font-size:0.7rem;
+    color:var(--muted);
+    display:block;
+    margin-bottom:16px;
+  }
+  .problem-card h3{
+    font-size:1.08rem;
+    font-weight:600;
+    margin-bottom:10px;
+  }
+  .problem-card p{ color:var(--ink-soft); font-size:0.94rem; }
+
+  @media (max-width:900px){ .problem-grid{ grid-template-columns:1fr; } }
+
+  /* ---------- PRODUCT FEATURES ---------- */
+  .features{ background:var(--indigo); color:#fff; }
+  .features .section-head p{ color:#C8CBEE; }
+  .features .eyebrow{ color:var(--spark-soft); }
+  .features .eyebrow::before{ background:var(--spark-soft); }
+
+  .feature-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:1px;
+    background:rgba(255,255,255,0.14);
+    border-radius:var(--radius);
+    overflow:hidden;
+  }
+  .feature-card{
+    background:var(--indigo-deep);
+    padding:36px 30px;
+  }
+  .feature-icon{
+    width:42px; height:42px;
+    border-radius:11px;
+    background:rgba(255,159,28,0.14);
+    display:flex; align-items:center; justify-content:center;
+    margin-bottom:22px;
+  }
+  .feature-card h3{
+    color:#fff;
+    font-size:1.14rem;
+    font-weight:600;
+    margin-bottom:10px;
+  }
+  .feature-card p{
+    color:#B7BBE6;
+    font-size:0.93rem;
+  }
+
+  @media (max-width:900px){ .feature-grid{ grid-template-columns:1fr; } }
+
+  /* ---------- DIFFERENTIATORS ---------- */
+  .diff-layout{
+    display:grid;
+    grid-template-columns:0.9fr 1.1fr;
+    gap:64px;
+    align-items:start;
+  }
+  .diff-list{ display:flex; flex-direction:column; }
+  .diff-row{
+    display:grid;
+    grid-template-columns:64px 1fr;
+    gap:22px;
+    padding:26px 0;
+    border-top:1px solid var(--line);
+  }
+  .diff-row:last-child{ border-bottom:1px solid var(--line); }
+  .diff-row .stat{
+    font-family:'Space Grotesk', sans-serif;
+    font-size:1.7rem;
+    font-weight:700;
+    color:var(--indigo);
+  }
+  .diff-row h3{ font-size:1.02rem; font-weight:600; margin-bottom:6px; }
+  .diff-row p{ color:var(--ink-soft); font-size:0.92rem; }
+
+  .quote-card{
+    background:var(--bg-panel);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:40px 36px;
+    position:sticky;
+    top:100px;
+  }
+  .quote-mark{
+    font-family:'Space Grotesk', sans-serif;
+    font-size:3rem;
+    color:var(--spark);
+    line-height:1;
+    margin-bottom:6px;
+  }
+  .quote-card p{
+    font-size:1.12rem;
+    color:var(--ink);
+    line-height:1.55;
+    margin-bottom:24px;
+  }
+  .quote-person{
+    display:flex; align-items:center; gap:12px;
+  }
+  .quote-avatar{
+    width:42px; height:42px;
+    border-radius:50%;
+    background:linear-gradient(135deg, var(--teal), var(--indigo));
+    flex-shrink:0;
+  }
+  .quote-person .name{ font-weight:600; font-size:0.92rem; }
+  .quote-person .role{ font-size:0.8rem; color:var(--muted); }
+
+  @media (max-width:900px){
+    .diff-layout{ grid-template-columns:1fr; }
+    .quote-card{ position:static; }
+  }
+
+  /* ---------- PRICING TEASER ---------- */
+  .pricing-strip{
+    background:var(--bg-panel);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:40px;
+    display:grid;
+    grid-template-columns:1.2fr repeat(2,1fr);
+    gap:1px;
+    overflow:hidden;
+  }
+  .pricing-strip{ background:var(--line); }
+  .pricing-col{
+    background:var(--bg-panel);
+    padding:34px 30px;
+  }
+  .pricing-col:first-child{ padding-right:36px; }
+  .pricing-col h3{ font-size:1.3rem; font-weight:700; margin-bottom:10px; }
+  .pricing-col p{ color:var(--ink-soft); font-size:0.92rem; margin-bottom:18px;}
+  .price{
+    font-family:'Space Grotesk', sans-serif;
+    font-size:2.1rem;
+    font-weight:700;
+    margin-bottom:4px;
+  }
+  .price span{ font-size:0.95rem; font-weight:500; color:var(--muted); }
+  .pricing-col ul{ list-style:none; margin-top:18px; }
+  .pricing-col li{
+    font-size:0.88rem;
+    color:var(--ink-soft);
+    padding:7px 0;
+    display:flex; gap:10px; align-items:flex-start;
+  }
+  .pricing-col li::before{
+    content:"—";
+    color:var(--teal);
+    flex-shrink:0;
+  }
+
+  @media (max-width:900px){ .pricing-strip{ grid-template-columns:1fr; } .pricing-col:first-child{ padding-right:30px; } }
+
+  /* ---------- CTA FINAL ---------- */
+  .cta-final{
+    background:var(--indigo);
+    color:#fff;
+    border-radius:28px;
+    padding:64px 56px;
+    display:grid;
+    grid-template-columns:1.1fr 0.9fr;
+    gap:40px;
+    align-items:center;
+  }
+  .cta-final h2{ color:#fff; font-size:clamp(1.7rem,3vw,2.3rem); margin-bottom:14px; }
+  .cta-final p{ color:#C8CBEE; font-size:1rem; margin-bottom:0; }
+  .cta-form{
+    background:rgba(255,255,255,0.06);
+    border:1px solid rgba(255,255,255,0.18);
+    border-radius:16px;
+    padding:26px;
+    display:flex; flex-direction:column; gap:14px;
+  }
+  .cta-form label{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.68rem;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:#B7BBE6;
+    display:block;
+    margin-bottom:6px;
+  }
+  .cta-form input{
+    width:100%;
+    background:rgba(255,255,255,0.08);
+    border:1px solid rgba(255,255,255,0.2);
+    border-radius:9px;
+    padding:11px 13px;
+    color:#fff;
+    font-family:'Inter', sans-serif;
+    font-size:0.92rem;
+  }
+  .cta-form input::placeholder{ color:#8489B8; }
+  .cta-form .btn-primary{
+    justify-content:center;
+    margin-top:4px;
+  }
+
+  @media (max-width:900px){
+    .cta-final{ grid-template-columns:1fr; padding:44px 28px; }
+  }
+
+  /* ---------- FOOTER ---------- */
+  footer{
+    padding:56px 0 40px;
+    border-top:1px solid var(--line);
+  }
+  .footer-grid{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    flex-wrap:wrap;
+    gap:32px;
+    margin-bottom:40px;
+  }
+  .footer-links{ display:flex; gap:48px; flex-wrap:wrap; }
+  .footer-col h4{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.68rem;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    color:var(--muted);
+    margin-bottom:14px;
+  }
+  .footer-col a{
+    display:block;
+    font-size:0.9rem;
+    color:var(--ink-soft);
+    padding:5px 0;
+  }
+  .footer-col a:hover{ color:var(--indigo); }
+  .footer-bottom{
+    display:flex; justify-content:space-between; flex-wrap:wrap; gap:14px;
+    padding-top:26px;
+    border-top:1px solid var(--line);
+    font-size:0.8rem;
+    color:var(--muted);
+  }
+
+  /* ---------- SCROLL REVEAL ---------- */
+  .reveal{
+    opacity:0;
+    transform:translateY(18px);
+    transition:opacity .6s ease, transform .6s ease;
+  }
+  .reveal.in{ opacity:1; transform:none; }
+</style>
+</head>
+<body>
+
+<header>
+  <nav>
+    <div class="logo">
+      <svg class="logo-mark" viewBox="0 0 26 26" fill="none">
+        <circle cx="13" cy="13" r="12" stroke="#2B2F77" stroke-width="1.4"/>
+        <path d="M8 15 L11.5 9 L14 13.5 L18 7" stroke="#FF9F1C" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <div>
+        NeuraLearn AI
+        <small>CogniSphere Technologies</small>
+      </div>
+    </div>
+    <div class="nav-links">
+      <a href="#produto">Produto</a>
+      <a href="#diferenciais">Diferenciais</a>
+      <a href="#planos">Planos</a>
+      <a href="#contato">Contato</a>
+    </div>
+    <a class="nav-cta" href="#contato">Agendar demonstração</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow">EdTech · IA Generativa</div>
+      <h1>Ligue a aprendizagem <em>em minutos</em>, não em meses.</h1>
+      <p class="lead">NeuraLearn AI é o tutor inteligente que sua instituição implementa em até 48 horas — geração automática de exercícios, chat de dúvidas 24/7 e um painel simples para acompanhar tudo.</p>
+      <div class="hero-ctas">
+        <a class="btn btn-primary" href="#contato">Começar agora</a>
+        <a class="btn btn-ghost" href="#produto">Ver como funciona</a>
+      </div>
+      <div class="hero-meta">
+        <span><span class="dot"></span>Onboarding em 48h</span>
+        <span><span class="dot"></span>Sem instalação complexa</span>
+        <span><span class="dot"></span>Suporte em português</span>
+      </div>
+    </div>
+
+    <div class="spark-stage">
+      <div class="spark-panel">
+        <svg viewBox="0 0 400 400" fill="none">
+          <line x1="40" y1="80" x2="360" y2="80" stroke="rgba(255,255,255,0.06)"/>
+          <line x1="40" y1="160" x2="360" y2="160" stroke="rgba(255,255,255,0.06)"/>
+          <line x1="40" y1="240" x2="360" y2="240" stroke="rgba(255,255,255,0.06)"/>
+          <line x1="40" y1="320" x2="360" y2="320" stroke="rgba(255,255,255,0.06)"/>
+
+          <path class="spark-path" d="M70 300 L150 300 L190 140 L230 260 L270 90 L330 90"
+                stroke="#FF9F1C" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+
+          <circle class="spark-node" cx="70" cy="300" r="7" fill="#FF9F1C"/>
+          <circle class="spark-node" cx="190" cy="140" r="7" fill="#FFD9A0"/>
+          <circle class="spark-node" cx="270" cy="90" r="7" fill="#FF9F1C"/>
+          <circle class="spark-node" cx="330" cy="90" r="9" fill="#FFD9A0"/>
+        </svg>
+        <div class="spark-caption">
+          <div class="num">48h</div>
+          <div class="label">Tempo médio de implementação em instituições parceiras</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="trust">
+  <div class="wrap">
+    <p>Em piloto com instituições de ensino superior e centros de treinamento corporativo</p>
+    <div class="trust-tags">
+      <span class="trust-tag">Ensino Superior Privado</span>
+      <span class="trust-tag">Cursos Técnicos</span>
+      <span class="trust-tag">Treinamento Corporativo</span>
+    </div>
+  </div>
+</div>
+
+<section id="problema">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">O problema</div>
+      <h2>Boa parte das soluções de IA educacional exige tempo e orçamento que sua equipe não tem agora.</h2>
+      <p>Implementações longas, times técnicos dedicados e contratos anuais afastam justamente as instituições que mais precisam de agilidade para inovar.</p>
+    </div>
+
+    <div class="problem-grid">
+      <div class="problem-card reveal">
+        <span class="mono">01</span>
+        <h3>Implementação lenta</h3>
+        <p>Projetos de IA educacional costumam levar meses entre contratação e primeiro uso real em sala.</p>
+      </div>
+      <div class="problem-card reveal">
+        <span class="mono">02</span>
+        <h3>Custo de entrada alto</h3>
+        <p>Contratos robustos afastam instituições de pequeno e médio porte que querem testar antes de escalar.</p>
+      </div>
+      <div class="problem-card reveal">
+        <span class="mono">03</span>
+        <h3>Complexidade desnecessária</h3>
+        <p>Equipes pequenas de coordenação pedagógica não têm tempo para configurar sistemas complexos.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="features" id="produto">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">O produto</div>
+      <h2>Três funções, um único lugar.</h2>
+      <p>Sem módulos extras para configurar. NeuraLearn AI entrega o essencial para começar a usar IA generativa na rotina pedagógica.</p>
+    </div>
+
+    <div class="feature-grid">
+      <div class="feature-card reveal">
+        <div class="feature-icon">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M3 5h14M3 10h14M3 15h9" stroke="#FF9F1C" stroke-width="1.8" stroke-linecap="round"/></svg>
+        </div>
+        <h3>Geração automática</h3>
+        <p>Envie um material de apoio e receba exercícios e resumos gerados automaticamente para a turma.</p>
+      </div>
+      <div class="feature-card reveal">
+        <div class="feature-icon">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M3 4h14v9H8l-4 4V4Z" stroke="#FF9F1C" stroke-width="1.8" stroke-linejoin="round"/></svg>
+        </div>
+        <h3>Chat de dúvidas 24/7</h3>
+        <p>Alunos tiram dúvidas a qualquer hora, com respostas baseadas no conteúdo enviado pela instituição.</p>
+      </div>
+      <div class="feature-card reveal">
+        <div class="feature-icon">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M4 16V9m6 7V4m6 12v-5" stroke="#FF9F1C" stroke-width="1.8" stroke-linecap="round"/></svg>
+        </div>
+        <h3>Painel de gestão</h3>
+        <p>Acompanhe uso e adoção da ferramenta em um painel simples, sem necessidade de treinamento técnico.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="diferenciais">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">Por que NeuraLearn AI</div>
+      <h2>Feito para quem precisa começar rápido.</h2>
+    </div>
+
+    <div class="diff-layout">
+      <div class="diff-list">
+        <div class="diff-row reveal">
+          <div class="stat">48h</div>
+          <div>
+            <h3>Onboarding acelerado</h3>
+            <p>Da assinatura ao primeiro uso em sala, sem longos ciclos de implementação.</p>
+          </div>
+        </div>
+        <div class="diff-row reveal">
+          <div class="stat">1</div>
+          <div>
+            <h3>Um único painel</h3>
+            <p>Toda a gestão de uso em um só lugar, pensado para coordenações pedagógicas enxutas.</p>
+          </div>
+        </div>
+        <div class="diff-row reveal">
+          <div class="stat">R$</div>
+          <div>
+            <h3>Entrada acessível</h3>
+            <p>Planos pensados para instituições de pequeno e médio porte testarem antes de escalar.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="quote-card reveal">
+        <div class="quote-mark">”</div>
+        <p>Conseguimos colocar o NeuraLearn AI para rodar com os professores em menos de uma semana, sem precisar de um time de TI dedicado ao projeto.</p>
+        <div class="quote-person">
+          <div class="quote-avatar"></div>
+          <div>
+            <div class="name">Coordenação Pedagógica</div>
+            <div class="role">Instituição parceira, piloto 2026</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="planos">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">Planos</div>
+      <h2>Comece pequeno. Escale quando fizer sentido.</h2>
+    </div>
+
+    <div class="pricing-strip reveal">
+      <div class="pricing-col">
+        <h3>Piloto</h3>
+        <p>Para instituições que querem testar antes de decidir.</p>
+        <div class="price">Sob consulta</div>
+        <ul>
+          <li>Até 1 turma ativa</li>
+          <li>Geração de exercícios e resumos</li>
+          <li>Suporte por e-mail</li>
+        </ul>
+      </div>
+      <div class="pricing-col">
+        <h3>Institucional</h3>
+        <p>Para coordenações que já validaram o uso.</p>
+        <div class="price">Sob consulta</div>
+        <ul>
+          <li>Turmas ilimitadas</li>
+          <li>Chat de dúvidas 24/7</li>
+          <li>Painel de gestão completo</li>
+        </ul>
+      </div>
+      <div class="pricing-col">
+        <h3>Rede de ensino</h3>
+        <p>Para grupos com múltiplas unidades.</p>
+        <div class="price">Sob consulta</div>
+        <ul>
+          <li>Múltiplas unidades</li>
+          <li>Onboarding assistido</li>
+          <li>Suporte prioritário</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contato">
+  <div class="wrap">
+    <div class="cta-final reveal">
+      <div>
+        <h2>Veja o NeuraLearn AI rodando na sua instituição.</h2>
+        <p>Agende uma demonstração de 20 minutos. Sem compromisso, sem instalação prévia necessária.</p>
+      </div>
+      <div class="cta-form">
+        <div>
+          <label>Nome</label>
+          <input type="text" placeholder="Seu nome completo">
+        </div>
+        <div>
+          <label>E-mail institucional</label>
+          <input type="email" placeholder="voce@instituicao.edu.br">
+        </div>
+        <div>
+          <label>Instituição</label>
+          <input type="text" placeholder="Nome da instituição">
+        </div>
+        <a class="btn btn-primary" href="#" onclick="return false;">Agendar demonstração</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="logo">
+        <svg class="logo-mark" viewBox="0 0 26 26" fill="none">
+          <circle cx="13" cy="13" r="12" stroke="#2B2F77" stroke-width="1.4"/>
+          <path d="M8 15 L11.5 9 L14 13.5 L18 7" stroke="#FF9F1C" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <div>
+          NeuraLearn AI
+          <small>CogniSphere Technologies</small>
+        </div>
+      </div>
+      <div class="footer-links">
+        <div class="footer-col">
+          <h4>Produto</h4>
+          <a href="#produto">Funcionalidades</a>
+          <a href="#diferenciais">Diferenciais</a>
+          <a href="#planos">Planos</a>
+        </div>
+        <div class="footer-col">
+          <h4>Empresa</h4>
+          <a href="#">Sobre</a>
+          <a href="#">Contato</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 CogniSphere Technologies. Todos os direitos reservados.</span>
+      <span>São Paulo, Brasil</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const items = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold:0.12 });
+  items.forEach(i=>io.observe(i));
+</script>
+
+</body>
+</html>
